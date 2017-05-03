@@ -15,19 +15,23 @@ namespace DiscordBot
 
         public DiscordBot()
         {
-            commands = client.GetService<CommandService>();
             client = new DiscordClient(input =>
             {
                 input.LogLevel = LogSeverity.Info;
                 input.LogHandler = Log;
             });
 
+
+
             client.UsingCommands(input =>
             {
-                input.PrefixChar("/");
-                input.AllowMentionPrefix(true);
-            }
-            );
+                input.PrefixChar= '!';
+                input.AllowMentionPrefix = true;
+            });
+
+
+            commands = client.GetService<CommandService>();
+
 
             commands.CreateCommand("teste").Do(async (e) =>          
             {
